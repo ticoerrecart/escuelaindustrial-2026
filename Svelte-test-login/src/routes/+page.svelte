@@ -58,6 +58,20 @@
                 Si el usuario no tiene permisos para acceder a la ruta, se redirige a la pagina de acceso denegado.
             </td>
         </tr>
+        <tr>
+            <td>api/auth/login/+server.ts</td>
+            <td>Archivo donde se redirige al servicio de autenticacion para verificar las credenciales</td>
+            <td>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>api/auth/logout/+server.ts</td>
+            <td>Archivo donde se elimina el token de autenticacion</td>
+            <td>
+               
+            </td>
+        </tr>
         <tr style="background-color: #f0f0f0; font-weight: bold;">
             <td>Otros archivos (no necesarios para la autenticacion)</td>
             <td>&nbsp;</td>

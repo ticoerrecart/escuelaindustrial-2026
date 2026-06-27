@@ -20,8 +20,6 @@
       <a href="/dashboard">Dashboard</a>
       <span>Logged in as {$page.data.user.email}</span>
       <button on:click={logout}>Logout</button>
-    {:else}
-      <a href="/login">Login</a>
     {/if}
   </nav>
 </header>

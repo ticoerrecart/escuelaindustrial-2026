@@ -1,14 +1,8 @@
 <script lang="ts">
-	import axios from 'axios';
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/stores';
 
 	let { children } = $props();
-
-	async function logout() {
-		await axios.post('/api/auth/logout');
-		window.location.href = '/login';
-	}
 </script>
 
 <svelte:head>
@@ -22,7 +16,7 @@
 			<a href="/dashboard">Dashboard</a>
 			<a href="/admin">Administracion</a>
 			<span>Logueado como {$page.data.user.email}</span>
-			<button type="button" onclick={logout}>Logout</button>
+			<a href="/logout">Logout</a>
 		{:else}
 			<a href="/login">Login</a>
 		{/if}

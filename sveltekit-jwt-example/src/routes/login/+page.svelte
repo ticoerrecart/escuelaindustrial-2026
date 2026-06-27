@@ -1,44 +1,55 @@
 <script>
-  import axios from "axios";
-  import { goto } from "$app/navigation";
+	import axios from "axios";
 
-  let email = "";
-  let password = "";
-  let error = "";
+	let { data } = $props();
 
-  async function login() {
-    error = "";
+	let email = $state("");
+	let password = $state("");
+	let error = $state("");
 
-    const { data } = await axios.post(
-      "/api/login",
-      { email, password },
-      { validateStatus: () => true },
-    );
-    debugger;
-    if (data.error) {
-      error = data.error;
-      return;
-    }
+	async function login() {
+		error = "";
 
-    /*auth.set({
-      loading: false,
-      user: data.user,
-    });*/
+		const { data: response } = await axios.post(
+			"/api/login",
+			{ email, password },
+			{ validateStatus: () => true },
+		);
 
-    window.location.href = "/dashboard";
-  }
+		if (response.error) {
+			error = response.error;
+			return;
+		}
+
+		if (data.returnTo) {
+			const url = new URL(data.returnTo);
+			url.searchParams.set("token", response.token);
+			window.location.href = url.toString();
+			return;
+		}
+
+		window.location.href = "/dashboard";
+	}
 </script>
 
-<h1>Login para testear el servicio de autenticacion</h1>
+<h1>Login</h1>
 
-<form on:submit|preventDefault={login}>
-  <input bind:value={email} type="email" placeholder="Email" />
+{#if data.returnTo}
+	<p>Iniciá sesión para volver a la aplicación que te envió acá.</p>
+{/if}
 
-  <input bind:value={password} type="password" placeholder="Password" />
+{#if data.returnToError}
+	<p>{data.returnToError}</p>
+{/if}
 
-  <button type="submit"> Login </button>
+<form onsubmit={(e) => { e.preventDefault(); login(); }}>
+	<input bind:value={email} type="email" placeholder="Email" required />
 
-  {#if error}
-    <p>{error}</p>
-  {/if}
+	<input bind:value={password} type="password" placeholder="Password" required />
+
+	<button type="submit">Login</button>
+
+	{#if error}
+		<p>{error}</p>
+	{/if}
 </form>

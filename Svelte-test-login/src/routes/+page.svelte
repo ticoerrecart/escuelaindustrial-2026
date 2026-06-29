@@ -33,7 +33,7 @@
 		</tr>
 		<tr>
 			<td>src/routes/+layout.server.ts</td>
-			<td>Provee el estado de autenticacion a la raiz de la app</td>
+			<td>Provee el estado del usuario logueado para mostrarlo en el layout.svelte</td>
 			<td></td>
 		</tr>
 		<tr style="background-color: #f0f0f0; font-weight: bold;">
@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td>src/routes/admin/, src/routes/dashboard</td>
-			<td>Paginas del proyecto</td>
+			<td>Paginas del proyecto protegidas</td>
 			<td>Deben estar listadas en PROTECTED_ROUTES del .env</td>
 		</tr>
 	</tbody>
